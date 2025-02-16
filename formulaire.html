@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire</title>
+  <link rel="stylesheet" href="./formulaire.css">
+</head>
+<body>
+  <form id="formulaire">
+    <h1>Formulaire</h1>
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" required>
+
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" required>
+
+    <label for="telephone">Téléphone :</label>
+    <input type="tel" id="telephone" name="telephone" placeholder="Entrez votre numéro de téléphone" required>
+
+    <label for="adresse">adresse :</label>
+    <input type="text" id="adresse" name="adresse" placeholder="Entrez votre adresse" required>
+
+    <!-- Affichage des produits sélectionnés -->
+    <div>
+      <h2 id="form-title"></h2>
+      <h2>Produits sélectionnés :</h2>
+      <ul id="selected-products"></ul>
+    </div>
+    <h2>Total Price : <span id="total-price-display">0</span> DT</h2>
+
+    <button type="button" id="confirm-button">Confirmer</button>
+    
+  </form>
+
+  <script>
+    // Récupérer les données depuis localStorage
+    const totalPrice = localStorage.getItem("totalPrice");
+    const selectedProducts = JSON.parse(localStorage.getItem("selectedProducts"));
+
+    // Afficher le Total Price
+    document.getElementById("total-price-display").textContent = totalPrice || "0";
+
+    // Afficher les produits sélectionnés avec leurs quantités
+    const productList = document.getElementById("selected-products");
+    if (selectedProducts && selectedProducts.length > 0) {
+      selectedProducts.forEach((product) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${product.quantity} ${product.id}`;
+        productList.appendChild(listItem);
+      });
+    } else {
+      productList.innerHTML = "<li>Aucun produit sélectionné.</li>";
+    }
+
+    // Ajouter un événement au bouton "Confirmer"
+    document.getElementById("confirm-button").addEventListener("click", function () {
+      const nom = document.getElementById("nom").value;
+      const prenom = document.getElementById("prenom").value;
+      const telephone = document.getElementById("telephone").value;
+      const adresse = document.getElementById("adresse").value;
+      // Vérifier si tous les champs sont remplis
+      if (!nom || !prenom || !telephone || !adresse ) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+      }
+
+      // Préparer le message WhatsApp
+      let message = `Nom : ${nom}\nPrénom : ${prenom}\nTéléphone : ${telephone}\nAdresse : ${adresse}\n\nProduits sélectionnés :\n`;
+
+      if (selectedProducts && selectedProducts.length > 0) {
+        selectedProducts.forEach((product) => {
+          message += `- ${product.quantity} x ${product.id}\n`;
+        });
+      } else {
+        message += "Aucun produit sélectionné.\n";
+      }
+
+      message += `\nTotal : ${totalPrice || 0} DT`;
+
+      // Encoder le message et générer le lien WhatsApp avec le numéro 47025199
+      const whatsappUrl = `https://wa.me/21654942408?text=${encodeURIComponent(message)}`;
+
+      // Rediriger vers WhatsApp
+      window.open(whatsappUrl, "_blank");
+    });
+
+
+  </script>
+</body>
+</html>

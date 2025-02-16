@@ -1,0 +1,408 @@
+ /* Réinitialisation des marges et du padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Corps de la page */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, transparent 100%);
+    background-size: 12px 12px, 100% 100%;
+    color: #333;
+   
+  }
+
+
+ 
+ /* Style de la navbar */
+ .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #004851; /* Transparent avec fond blanc léger */
+    backdrop-filter: blur(12px); /* Effet de flou derrière la navbar */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ombre subtile pour un effet flottant */
+    padding: 10px 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Changement de fond et ombre lors du défilement */
+  .navbar.scrolled {
+    background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
+    backdrop-filter: blur(10px); /* Flou de 10px */
+    -webkit-backdrop-filter: blur(10px); /* Fond transparent */
+    box-shadow: none; 
+    nav ul li a {
+      text-decoration: none;
+      color: #004851;
+      font-size: 18px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #0a0a07; /* Couleur au survol */
+      
+    }
+    
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #004851;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+  }
+  
+  /* Conteneur de la navbar */
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Conteneur du logo */
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Logo image */
+  .logo-img {
+    width: 40px;
+    height: auto;
+    margin-right: 10px; /* Espacement entre l'image et le texte */
+  }
+  
+  /* Texte du logo */
+  .logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #E0E622;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+  
+  .logo:hover {
+    color: #E0E622; /* Couleur au survol */
+    transform: scale(1.2);
+  }
+  
+  /* Style des liens dans la navbar */
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+  
+  nav ul li {
+    margin-left: 30px;
+    position: relative;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #E0E622;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    color: #0a0a07; /* Couleur au survol */
+    
+  }
+  
+  /* Hamburger icon */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 999; /* Pour le rendre cliquable par-dessus les autres éléments */
+  }
+  
+  .hamburger .bar {
+    width: 100%;
+    height: 4px;
+    background-color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hamburger transformé en croix */
+  .hamburger.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  
+  .hamburger.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  /* Responsive: menu hamburger */
+  @media (max-width: 768px) {
+    /* La navbar se redimensionne, logo à gauche et hamburger à droite */
+    .container {
+      display: flex;
+      justify-content: space-between; /* Espacement entre le logo et le hamburger */
+      align-items: center;
+    }
+  
+    /* Espacement entre le logo et le hamburger */
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+  
+    .logo {
+      margin-right: 180px; /* Ajout d'un petit espacement après le logo */
+    }
+  
+    /* Masquer le menu de navigation par défaut */
+    nav ul {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      width: 100%;
+      height: 0;
+      flex-direction: column;
+      align-items: flex-start; /* Alignement à gauche pour les liens */
+      overflow: hidden;
+      transition: height 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Ombre pour plus de contraste sur mobile */
+      padding-left: 20px; /* Espacement gauche des liens */
+    }
+  
+    /* Espacement entre les éléments du menu hamburger */
+    nav ul li {
+      margin-top: 20px;
+      margin-left: 0;
+    }
+  
+    nav ul li a {
+      font-size: 22px;
+      color: #333;
+    }
+  
+    /* Afficher l'icône du hamburger */
+    .hamburger {
+      display: flex;
+    }
+  
+    /* Lorsque le menu est activé, il devient visible */
+    nav.active ul {
+      height: 250px; /* Hauteur du menu déroulant */
+    }
+  }
+  /* __________________ */
+  .shopping-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e7e7e7;
+    padding: 20px;
+    border-radius: 2%;
+    margin: 50px 10%;
+  }
+  
+  .total-price-container {
+    background-color: #eeeeee;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .total-price-container span {
+    font-size: 30px;
+  }
+  
+  /* Card content CSS */
+  .cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .card {
+    margin: 2%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2%;
+  }
+  
+  .product-image {
+    width: 100%;
+  }
+  
+  .unit-price {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .plus-btn,
+  .minus-btn {
+    font-size: 30px;
+    margin: 10px;
+  }
+  
+  .plus-btn:hover {
+    color: rgb(30, 95, 30);
+  }
+  
+  .minus-btn:hover {
+    color: rgb(199, 16, 16);
+  }
+  
+  .list-group-item i {
+    margin: 10px;
+  }
+  
+  .fa-trash-alt {
+    font-size: 30px;
+    color: black;
+  }
+  .toggleHeart {
+    color: red;
+  }
+  /* Mobile and Tablet responsive design */
+@media (max-width: 768px) {
+  .navbar {
+      padding: 10px 15px;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .carousel-item {
+      height: 400px; /* Reduce carousel height on smaller screens */
+  }
+
+  .shopping-card {
+      margin: 20px 5%;
+      padding: 15px;
+  }
+
+  .cards-container {
+      flex-direction: column;
+      padding: 10px;
+  }
+
+  .card {
+      margin: 10px 0;
+      width: 100%;
+  }
+
+  .product-image {
+      height: 200px;
+      object-fit: cover;
+  }
+
+  .unit-price {
+      font-size: 18px; /* Adjust unit price font size */
+  }
+
+  .plus-btn,
+  .minus-btn {
+      font-size: 25px;
+  }
+
+  .total-price-container {
+      padding: 15px;
+  }
+
+  .total-price-container span {
+      font-size: 24px;
+  }
+
+  .fa-trash-alt {
+      font-size: 25px;
+  }
+
+  /* Adjust the heart icon on small screens */
+  .toggleHeart {
+      font-size: 25px;
+  }
+}
+
+/* For very small screens (Phones in portrait mode) */
+@media (max-width: 480px) {
+  .navbar {
+      padding: 10px;
+      font-size: 14px;
+  }
+
+  .carousel-item {
+      height: 300px; /* Further reduce the height */
+  }
+
+  .shopping-card {
+      padding: 10px;
+  }
+
+  .cards-container {
+      flex-direction: column;
+  }
+
+  .card {
+      width: 100%;
+      padding: 10px;
+  }
+
+  .product-image {
+      height: 180px;
+  }
+
+  .unit-price {
+      font-size: 16px;
+  }
+
+  .plus-btn,
+  .minus-btn {
+      font-size: 20px;
+  }
+
+  .total-price-container {
+      padding: 10px;
+  }
+
+  .total-price-container span {
+      font-size: 20px;
+  }
+
+  .fa-trash-alt {
+      font-size: 20px;
+  }
+
+  .toggleHeart {
+      font-size: 20px;
+  }
+}
+#acheter-btn {
+  background-color: #4CAF50; /* Vert */
+  color: white; /* Couleur du texte */
+  border: none; /* Pas de bordure */
+  padding: 10px 20px; /* Espacement interne */
+  text-align: center; /* Centrer le texte */
+  text-decoration: none; /* Pas de soulignement */
+  display: inline-block; /* Comportement en ligne */
+  font-size: 16px; /* Taille de la police */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur au survol */
+}
+
+#acheter-btn:hover {
+  background-color: #45a049; /* Couleur au survol */
+}
